@@ -8,7 +8,7 @@ namespace Client;
 internal static class Program {
     private static Customer.CustomerClient _customerClient;
 
-    private static async Task Main(string[] args) {
+    private static async Task Main(string[] args){
         // ---------------------------------------------------------------------
         var channel = GrpcChannel.ForAddress("http://localhost:5000", new GrpcChannelOptions {
             Credentials = ChannelCredentials.Insecure
