@@ -2,3 +2,4 @@ For a more detail watch Tim Corey's tutorial: https://www.youtube.com/watch?v=Qy
 
 
 Best Practicces: https://protobuf.dev/programming-guides/dos-donts/
+https://protobuf.dev/programming-guides/1-1-1/
