@@ -4,6 +4,8 @@ option csharp_namespace = "Core";
 
 service Customer {
   rpc GetCustomers (CustomerLockup) returns (CustomerModel);
+  rpc GetNewCustomersAsStream (Empty) returns (stream CustomerModel);
+  rpc GetNewCustomersAsArray (Empty) returns (CustomersModel);
 }
 
 message CustomerLockup {
@@ -15,3 +17,9 @@ message CustomerModel {
   string firstname = 2;
   string lastname = 3;
 }
+
+message CustomersModel {
+  repeated CustomerModel customers = 1;
+}
+
+message Empty { }
