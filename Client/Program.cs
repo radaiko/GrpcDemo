@@ -16,19 +16,24 @@ internal static class Program {
         _customerClient = new Customer.CustomerClient(channel);
         
         // ---------------------------------------------------------------------
+        Console.WriteLine();
         Console.WriteLine("Output existing customer");
         for (var i = 1; i <= 3; i++) {
             await OutputCustomer(i);
         }
         
         // ---------------------------------------------------------------------
+        Console.WriteLine();
         Console.WriteLine("Output new customers from stream");
-        var stream = _customerClient.GetNewCustomersAsStream(new Empty());
-        await foreach (var newCustomer in stream.ResponseStream.ReadAllAsync()) {
-            Console.WriteLine($"{newCustomer.Firstname}, {newCustomer.Lastname}");
+        using (var stream = _customerClient.GetNewCustomersAsStream(new Empty())) {
+            while (await stream.ResponseStream.MoveNext()) {
+                var customer = stream.ResponseStream.Current;
+                Console.WriteLine($"{customer.Firstname}, {customer.Lastname}");
+            }
         }
         
         // ---------------------------------------------------------------------
+        Console.WriteLine();
         Console.WriteLine("Output new customers from arary");
         var newCustomerArray = await _customerClient.GetNewCustomersAsArrayAsync(new Empty());
         foreach (var newCustomer in newCustomerArray.Customers) {
