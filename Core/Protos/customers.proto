@@ -1,0 +1,17 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Core";
+
+service Customer {
+  rpc GetCustomers (CustomerLockup) returns (CustomerModel);
+}
+
+message CustomerLockup {
+  int32 id = 1;
+}
+
+message CustomerModel {
+  int32 id = 1;
+  string firstname = 2;
+  string lastname = 3;
+}
